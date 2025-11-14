@@ -1,0 +1,154 @@
+
+[
+  {
+    "model": "agro_catalog.culture",
+    "pk": 1,
+    "fields": {
+      "name": "Пшениця"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 2,
+    "fields": {
+      "name": "Соняшник"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 3,
+    "fields": {
+      "name": "Кукурудза"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 4,
+    "fields": {
+      "name": "Картопля"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 5,
+    "fields": {
+      "name": "Виноград"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 6,
+    "fields": {
+      "name": "Огірок"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 7,
+    "fields": {
+      "name": "Томат"
+    }
+  },
+  {
+    "model": "agro_catalog.culture",
+    "pk": 8,
+    "fields": {
+      "name": "Ріпак"
+    }
+  },
+  {
+    "model": "agro_catalog.disease",
+    "pk": 101,
+    "fields": {
+      "name": "Борошниста роса",
+      "type": "FUNGAL",
+      "cultures": [1, 5, 6]
+    }
+  },
+  {
+    "model": "agro_catalog.disease",
+    "pk": 102,
+    "fields": {
+      "name": "Іржа",
+      "type": "FUNGAL",
+      "cultures": [1, 2]
+    }
+  },
+  {
+    "model": "agro_catalog.disease",
+    "pk": 103,
+    "fields": {
+      "name": "Фітофтороз",
+      "type": "FUNGAL",
+      "cultures": [4, 7]
+    }
+  },
+  {
+    "model": "agro_catalog.disease",
+    "pk": 104,
+    "fields": {
+      "name": "Сіра гниль",
+      "type": "FUNGAL",
+      "cultures": [5, 7, 8]
+    }
+  },
+  {
+    "model": "agro_catalog.disease",
+    "pk": 105,
+    "fields": {
+      "name": "Стебловий метелик",
+      "type": "PEST",
+      "cultures": [3]
+    }
+  },
+  {
+    "model": "agro_catalog.drug",
+    "pk": 201,
+    "fields": {
+      "name": "Фундазол",
+      "price": "350.50",
+      "description": "Системний фунгіцид широкого спектру дії.",
+      "fights_diseases": [101, 104]
+    }
+  },
+  {
+    "model": "agro_catalog.drug",
+    "pk": 202,
+    "fields": {
+      "name": "Амістар",
+      "price": "980.00",
+      "description": "Високоефективний фунгіцид для захисту зернових та соняшника.",
+      "fights_diseases": [102, 101]
+    }
+  },
+  {
+    "model": "agro_catalog.drug",
+    "pk": 203,
+    "fields": {
+      "name": "Ревус Топ",
+      "price": "610.99",
+      "description": "Комбінований препарат для боротьби з фітофторозом.",
+      "fights_diseases": [103]
+    }
+  },
+  {
+    "model": "agro_catalog.drug",
+    "pk": 204,
+    "fields": {
+      "name": "Актара",
+      "price": "185.25",
+      "description": "Інсектицид системної дії.",
+      "fights_diseases": [105]
+    }
+  },
+  {
+    "model": "agro_catalog.drug",
+    "pk": 205,
+    "fields": {
+      "name": "Квадріс",
+      "price": "720.00",
+      "description": "Фунгіцид для захисту овочів та винограду.",
+      "fights_diseases": [101, 104, 103]
+    }
+  }
+]
