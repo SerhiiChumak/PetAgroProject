@@ -7,7 +7,7 @@ urlpatterns = [
 
     # Списки об'єктів
     path('cultures/', views.CultureListView.as_view(), name='culture_list'),
-    path('diseases/', views.DiseaseListView.as_asview(), name='disease_list'),
+    path('diseases/', views.DiseaseListView.as_view(), name='disease_list'),
     path('drugs/', views.DrugListView.as_view(), name='drug_list'),
 
     path('cultures/<int:pk>/', views.CultureDetailView.as_view(), name='culture_detail'),
