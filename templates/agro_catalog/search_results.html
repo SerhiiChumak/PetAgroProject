@@ -1,30 +1,30 @@
 {% extends "agro_catalog/base.html" %}
 
-{% block title %}Результати Пошуку{% endblock %}
+{% block title %}Search Results{% endblock %}
 
 {% block content %}
-  <h2 class="mb-4">🔍 Результати Пошуку: "{{ query }}"</h2>
+  <h2 class="mb-4">🔍 Search Results: "{{ query }}"</h2>
 
   {% if not culture_results and not disease_results and not drug_results %}
     <div class="alert alert-warning" role="alert">
-      На жаль, за запитом **"{{ query }}"** нічого не знайдено в каталозі.
+      Unfortunately, nothing was found in the catalog for the query **"{{ query }}"**.
     </div>
   {% else %}
 
-    <h4 class="mt-4 border-bottom pb-2">💊 Препарати ({{ drug_results.count }})</h4>
+    <h4 class="mt-4 border-bottom pb-2">💊 Drugs ({{ drug_results.count }})</h4>
     {% if drug_results %}
       <div class="list-group mb-4">
         {% for item in drug_results %}
           <a href="{% url 'drug_detail' pk=item.pk %}" class="list-group-item list-group-item-action">
-            **{{ item.name }}** (Ціна: {{ item.price }} грн)
+            **{{ item.name }}** (Price: {{ item.price }} grn)
           </a>
         {% endfor %}
       </div>
     {% else %}
-      <p>Не знайдено препаратів.</p>
+      <p>No drugs found.</p>
     {% endif %}
 
-    <h4 class="mt-4 border-bottom pb-2">🦠 Хвороби ({{ disease_results.count }})</h4>
+    <h4 class="mt-4 border-bottom pb-2">🦠 Disease ({{ disease_results.count }})</h4>
     {% if disease_results %}
       <div class="list-group mb-4">
         {% for item in disease_results %}
@@ -34,10 +34,10 @@
         {% endfor %}
       </div>
     {% else %}
-      <p>Не знайдено хвороб.</p>
+      <p>Diseases not found.</p>
     {% endif %}
 
-    <h4 class="mt-4 border-bottom pb-2">🌾 Культури ({{ culture_results.count }})</h4>
+    <h4 class="mt-4 border-bottom pb-2">🌾 Cultures ({{ culture_results.count }})</h4>
     {% if culture_results %}
       <div class="list-group mb-4">
         {% for item in culture_results %}
@@ -47,10 +47,10 @@
         {% endfor %}
       </div>
     {% else %}
-      <p>Не знайдено культур.</p>
+      <p>Cultures not found.</p>
     {% endif %}
 
   {% endif %}
 
-  <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-3">← На головну</a>
+  <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-3">← Back to home page</a>
 {% endblock %}
