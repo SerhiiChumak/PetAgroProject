@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
 from .models import Culture, Disease, Drug
 
 
@@ -54,3 +55,29 @@ class DrugDetailView(DetailView):
 
     template_name = 'agro_catalog/drug_detail.html'
     context_object_name = 'drug'
+
+
+def search_view(request):
+    query = request.GET.get('q')
+
+    culture_results = []
+    disease_results = []
+    drug_results = []
+
+    if query:
+        culture_results = Culture.objects.filter(name__icontains=query)
+
+        disease_results = Disease.objects.filter(
+            Q(name__icontains=query) | Q(type__icontains=query)
+        )
+
+        drug_results = Drug.objects.filter(name__icontains=query)
+
+    context = {
+        'query': query,
+        'culture_results': culture_results,
+        'disease_results': disease_results,
+        'drug_results': drug_results,
+    }
+
+    return render(request, 'agro_catalog/search_results.html', context)

@@ -13,4 +13,5 @@ urlpatterns = [
     path('cultures/<int:pk>/', views.CultureDetailView.as_view(), name='culture_detail'),
     path('diseases/<int:pk>/', views.DiseaseDetailView.as_view(), name='disease_detail'),
     path('drugs/<int:pk>/', views.DrugDetailView.as_view(), name='drug_detail'),
+    path('search/', views.search_view, name='search'),
 ]
