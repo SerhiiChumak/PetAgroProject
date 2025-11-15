@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from .models import Culture, Disease, Drug
 
 
@@ -81,3 +82,8 @@ def search_view(request):
     }
 
     return render(request, 'agro_catalog/search_results.html', context)
+
+
+@login_required
+def profile_view(request):
+    return render(request, 'profile.html', {'user': request.user})
