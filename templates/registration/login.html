@@ -1,0 +1,13 @@
+<h2>🔐 Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enter</button>
+</form>
+
+<p><a href="{% url 'password_reset' %}">Wrong password</a></p>
+
+{% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+{% endif %}
