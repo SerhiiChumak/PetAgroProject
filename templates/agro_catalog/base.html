@@ -15,6 +15,7 @@
 
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">🌱 Agro Shop</a>
@@ -22,22 +23,10 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <div class="container">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto"></ul>
 
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search' %}">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search"
-                     name="q" value="{{ request.GET.q|default_if_none:'' }}">
-              <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
-
-          </div>
-        </div>
-      </nav>
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'culture_list' %}">Cultures</a>
         </li>
@@ -51,6 +40,41 @@
           <a class="nav-link" href="#">About Author</a>
         </li>
       </ul>
+
+      <form class="form-inline my-2 my-lg-0 mx-3" method="GET" action="{% url 'search' %}">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search"
+               name="q" value="{{ request.GET.q|default_if_none:'' }}">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+
+          <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}" class="form-inline">
+              {% csrf_token %}
+              <span class="navbar-text mr-2 text-white">
+                 Hello, **{{ user.username }}**!
+              </span>
+              <button type="submit" class="btn btn-sm btn-outline-light">
+                Exit
+              </button>
+            </form>
+          </li>
+
+          {% if user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link btn btn-sm btn-outline-warning ml-2" href="/admin/">Update data (Admin)</a>
+            </li>
+          {% endif %}
+
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link btn btn-sm btn-outline-light" href="{% url 'login' %}">Enter</a>
+          </li>
+        {% endif %}
+      </ul>
+
     </div>
   </div>
 </nav>
