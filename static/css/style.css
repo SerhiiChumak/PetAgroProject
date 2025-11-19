@@ -1,0 +1,17 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/agro_picture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+main.container {
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 30px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
