@@ -87,3 +87,10 @@ def search_view(request):
 @login_required
 def profile_view(request):
     return render(request, 'profile.html', {'user': request.user})
+
+
+def about_author_view(request):
+    context = {
+
+    }
+    return render(request, 'agro_catalog/about_author.html', context)
