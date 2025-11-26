@@ -1,0 +1,38 @@
+{% extends "agro_catalog/base.html" %}
+
+{% block title %}Culture List{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">🌾 Catalog of Cultures (Plants)</h2>
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Culture Name</th>
+      <th scope="col">Number of Associated Diseases</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for culture in cultures %}
+      <tr>
+        <td>
+          <a href="{% url 'culture_detail' pk=culture.pk %}">
+            {{ culture.name }}
+          </a>
+        </td>
+        <td>
+          <span class="badge badge-primary badge-pill">
+            {{ culture.diseases.count }}
+          </span>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="2">Unfortunately, there are no crops in the catalog yet.</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-3">← Back to home page</a>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "agro_catalog/base.html" %}
+
+{% block title %}Drug Details: {{ drug.name }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white">
+          <h3 class="card-title mb-0">Main Features</h3>
+        </div>
+        <div class="card-body">
+          <h1 class="mb-3">{{ drug.name }}</h1>
+          <p class="lead">
+            **Price:** <span class="badge badge-secondary badge-lg">{{ drug.price }} grn</span>
+          </p>
+
+          <hr>
+
+          <h4 class="mt-4">Description:</h4>
+          {% if drug.description %}
+            <p>{{ drug.description|linebreaks }}</p>
+          {% else %}
+            <div class="alert alert-light" role="alert">
+              There is no detailed description of this drug.
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <div class="card shadow">
+        <div class="card-header bg-info text-white">
+          <h4 class="card-title mb-0">⚔️ Diseases it fights:</h4>
+        </div>
+        <div class="card-body p-0">
+          {% if drug.fights_diseases.all %}
+            <ul class="list-group list-group-flush">
+              {% for disease in drug.fights_diseases.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{% url 'disease_detail' pk=disease.pk %}">
+                    {{ disease.name }}
+                  </a>
+                  <span class="badge badge-warning badge-pill">{{ disease.get_type_display }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="p-3">
+              <div class="alert alert-warning" role="alert">
+                This drug does not list the diseases it fights.
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'drug_list' %}" class="btn btn-outline-secondary mt-4">← Return to the list of drugs</a>
+{% endblock %}

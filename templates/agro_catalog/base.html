@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>{% block title %}Agro Catalog | Portfolio Python Developer{% endblock %}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+        crossorigin="anonymous">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% block extra_css %}{% endblock %}
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark agro-navbar sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">🌱 Agro Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'culture_list' %}">Cultures</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'disease_list' %}">Diseases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'drug_list' %}">Drugs</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'about_author' %}">About Author</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0 mx-3" method="GET" action="{% url 'search' %}">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search"
+               name="q" value="{{ request.GET.q|default_if_none:'' }}">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}" class="form-inline">
+              {% csrf_token %}
+              <span class="navbar-text mr-2 text-white">
+                 Hello, <strong>{{ user.username }}</strong>!
+              </span>
+              <button type="submit" class="btn btn-sm btn-outline-light">
+                Exit
+              </button>
+            </form>
+          </li>
+          {% if user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link btn btn-sm btn-outline-warning ml-2" href="/admin/">Admin</a>
+            </li>
+          {% endif %}
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link btn btn-sm btn-outline-light" href="{% url 'login' %}">Enter</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main role="main" class="container mt-4 mb-5">
+  {% block content %}
+  {% endblock %}
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3vA9/1N"
+        crossorigin="anonymous"></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

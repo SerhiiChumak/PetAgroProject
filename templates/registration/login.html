@@ -1,0 +1,19 @@
+{% extends "agro_catalog/base.html" %}
+{% block content %}
+  <h2>Login for store users</h2>
+  {% if form.errors %}
+    <p style="color: red;">
+      Your username and password do not match. Please try again.
+    </p>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enter</button>
+    {% if next %}
+      <input type="hidden" name="next" value="{{ next }}"/>
+    {% endif %}
+  </form>
+  <p><a href="{% url 'password_reset' %}">Wrong password?</a></p>
+{% endblock %}
+

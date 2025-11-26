@@ -1,0 +1,71 @@
+{% extends "agro_catalog/base.html" %}
+
+{% block title %}Disease detail: {{ disease.name }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card shadow mb-4">
+        <div class="card-header bg-danger text-white">
+          <h3 class="card-title mb-0">Detailed Information about the Disease</h3>
+        </div>
+        <div class="card-body">
+          <h1 class="mb-3">{{ disease.name }}</h1>
+          <p class="lead">
+            **Type:** <span class="badge badge-warning">{{ disease.get_type_display }}</span>
+          </p>
+
+          <hr>
+
+          Cultures (What plants does it affect)-->
+          <h4 class="mt-4 mb-3">🌱 Affects the following cultures:</h4>
+          {% if disease.cultures.all %}
+            <ul class="list-group">
+              {% for culture in disease.cultures.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{% url 'culture_detail' pk=culture.pk %}">
+                    {{ culture.name }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="alert alert-info" role="alert">
+              There is no information about affected cultures.
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    Drugs (What to treat)-->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-header bg-success text-white">
+          <h4 class="card-title mb-0">💊 Recommended Drugs</h4>
+        </div>
+        <div class="card-body p-0">
+          {% if disease.drugs.all %}
+            <ul class="list-group list-group-flush">
+              {% for drug in disease.drugs.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{% url 'drug_detail' pk=drug.pk %}">
+                    {{ drug.name }}
+                  </a>
+                  <span class="badge badge-secondary badge-pill">{{ drug.price }} grn</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="p-3">
+              <div class="alert alert-warning" role="alert">
+                There are currently no recommended medications to treat this disease.
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'disease_list' %}" class="btn btn-outline-secondary mt-4">← Return to list of diseases</a>
+{% endblock %}
